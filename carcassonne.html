@@ -1,0 +1,880 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>Carcassonne</title>
+	<style>
+	
+@import url(https://fonts.googleapis.com/css?family=Underdog);
+
+html {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+article, section {
+  display: block;
+}
+
+button, input {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+
+button {
+  overflow: visible;
+  text-transform: none;
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+
+button:active, button:focus {
+  outline: none;
+}
+
+input {
+  line-height: normal;
+}
+
+body {
+  font: normal 93.75%, sans;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font: 1.4em "Underdog", serif;
+  letter-spacing: .03em;
+}
+
+button {
+  background: transparent;
+  border: none;
+}
+
+#shilds, #score, #close {
+  display: none;
+}
+
+body, #start, #shilds, #score, #close {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  height: 100%;
+  overflow: overlay;
+}
+
+.visible {
+  visibility: visible !important;
+  -webkit-animation: pullDown .8s linear;
+          animation: pullDown .8s linear;
+}
+
+#start {
+  border: 30px solid skyblue;
+  -webkit-border-image: url("http://htmlbook.ru/files/images/css/css_border-image-1.png") 30 round round;
+       -o-border-image: url("http://htmlbook.ru/files/images/css/css_border-image-1.png") 30 round round;
+          border-image: url("http://htmlbook.ru/files/images/css/css_border-image-1.png") 30 round round;
+  background: url("https://tepler.ru/uploads/media/topic/2016/08/26/11/d5d4d0ea4c9d544c3fcf.jpg") center/cover no-repeat scroll skyblue;
+  -webkit-animation: visible 2.4s linear;
+          animation: visible 2.4s linear;
+}
+
+#start::-webkit-scrollbar {
+  width: 7px;
+}
+
+#start::-webkit-scrollbar-thumb {
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(-5%, #B1C2D2), color-stop(15%, skyblue), color-stop(30%, transparent), color-stop(90%, #24526f), color-stop(103%, transparent));
+  background-image: -webkit-linear-gradient(#B1C2D2 -5%, skyblue 15%, transparent 30%, #24526f 90%, transparent 103%);
+  background-image: linear-gradient(#B1C2D2 -5%, skyblue 15%, transparent 30%, #24526f 90%, transparent 103%);
+}
+
+#start article {
+  max-width: 990px;
+  margin: 0 auto;
+  padding: 24px 48px 32px;
+  border: 3px solid sienna;
+  z-index: 10;
+  text-align: justify;
+  -moz-text-align-last: center;
+       text-align-last: center;
+  background: lightyellow;
+  visibility: hidden;
+}
+
+#start article h1, #start article span {
+  font-weight: bold;
+  color: #bb2917;
+}
+
+#start article h1 {
+  font-size: 1.6em;
+}
+
+@media only screen and (max-width: 479px) {
+  #start article {
+    padding: 24px 8px 32px;
+	font-size: .8em;
+	text-align: center;
+  }
+}
+
+
+#read {
+  float: right;
+  border: none;
+  margin-right: 24px;
+  z-index: 10;
+  font-size: 2em;
+  color: #2a6082;
+}
+
+#waymark {
+  margin-top: -16px;
+  font-size: 3.6em;
+  font-weight: bold;
+  color: #bb2917;
+  text-align: center;
+}
+
+.green {
+  background: #00803a;
+  border: 1px solid #005727;
+}
+
+.green:hover {
+  border: 1px solid #00803a;
+}
+
+.gray {
+  background: #618080;
+  border: 1px solid #4f6969;
+}
+
+.gray:hover {
+  border: 1px solid #618080;
+}
+
+.yellow {
+  background: #ffbf00;
+  border: 1px solid #d6a100;
+}
+
+.yellow:hover {
+  border: 1px solid #ffbf00;
+}
+
+.blue {
+  background: #005a6c;
+  border: 1px solid #003844;
+}
+
+.blue:hover {
+  border: 1px solid #005a6c;
+}
+
+.black {
+  background: #2c2519;
+  border: 1px solid #120f0a;
+}
+
+.black:hover {
+  border: 1px solid #2c2519;
+}
+
+.red {
+  background: #991b1f;
+  border: 1px solid #761518;
+}
+
+.red:hover {
+  border: 1px solid #991b1f;
+}
+
+#shilds {
+  border: 30px solid #cdb896;
+  -webkit-border-image: url("http://www.flooringcenter.ru/images/products/27772/main.jpg") 130 round round;
+       -o-border-image: url("http://www.flooringcenter.ru/images/products/27772/main.jpg") 130 round round;
+          border-image: url("http://www.flooringcenter.ru/images/products/27772/main.jpg") 130 round round;
+  outline: 6px double #5c492c;
+  outline-offset: -35px;
+  padding: 80px 120px;
+  background-color: lightyellow;
+}
+
+@media only screen and (max-width: 479px) {
+  #shilds {
+    padding: 30px;
+    border: none;
+    outline: none;
+  }
+}
+
+#shilds::-webkit-scrollbar, #score::-webkit-scrollbar {
+  width: 7px;
+}
+
+#shilds::-webkit-scrollbar-thumb, #score::-webkit-scrollbar-thumb {
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(-5%, lightyellow), color-stop(15%, #cdb896), color-stop(30%, transparent), color-stop(90%, #c4ac85), color-stop(103%, transparent));
+  background-image: -webkit-linear-gradient(lightyellow -5%, #cdb896 15%, transparent 30%, #c4ac85 90%, transparent 103%);
+  background-image: linear-gradient(lightyellow -5%, #cdb896 15%, transparent 30%, #c4ac85 90%, transparent 103%);
+}
+
+#menu {
+  width: 100%;
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+  min-height: 70%;
+}
+
+#menu:after {
+  content: " ";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+#menu > * {
+  float: left;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 2%;
+  width: 12%;
+}
+
+@media only screen and (max-width: 959px) {
+  #menu {
+    width: 100%;
+    -webkit-box-sizing: content-box;
+            box-sizing: content-box;
+  }
+  #menu:after {
+    content: " ";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+  }
+  #menu > * {
+    float: left;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    margin: 2%;
+    width: 28%;
+  }
+}
+
+@media only screen and (max-width: 479px) {
+  #menu {
+    width: 100%;
+    -webkit-box-sizing: content-box;
+            box-sizing: content-box;
+  }
+  #menu:after {
+    content: " ";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+  }
+  #menu > * {
+    float: right;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    margin: 4%;
+    width: 38%;
+  }
+}
+
+#menu button {
+  overflow: hidden;
+  max-height: 120px;
+  margin-bottom: 30px;
+  -webkit-box-shadow: 1px 2px 9px #AB8952;
+          box-shadow: 1px 2px 9px #AB8952;
+  position: relative;
+  transition: all 0.2s;
+}
+
+#menu button:before {
+  content: '';
+  padding-top: 100%;
+  float: left;
+}
+
+#menu button:after {
+  content: "";
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+  border: 1px solid rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
+  background-image: -webkit-linear-gradient(165deg, transparent, rgba(255, 255, 224, 0.5), transparent 75%);
+  background-image: linear-gradient(-75deg, transparent, rgba(255, 255, 224, 0.5), transparent 75%);
+  transition: all 0.2s;
+}
+
+#menu button:active {
+  position: relative;
+}
+
+#menu button:active:after {
+  content: "";
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+  background-color: transparent;
+  background-image: -webkit-linear-gradient(165deg, transparent, rgba(255, 255, 224, 0.64), transparent 80%);
+  background-image: linear-gradient(-75deg, transparent, rgba(255, 255, 224, 0.64), transparent 80%);
+}
+
+#menu button.selected {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+#menu button.selected:after {
+  background-image: none;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+#confirm {
+  display: block;
+  margin: 30px auto;
+  font-size: 1.4em;
+  color: #bb2917;
+}
+
+#score {
+  border: 30px solid #cdb896;
+  -webkit-border-image: url("http://www.flooringcenter.ru/images/products/27772/main.jpg") 130 round round;
+       -o-border-image: url("http://www.flooringcenter.ru/images/products/27772/main.jpg") 130 round round;
+          border-image: url("http://www.flooringcenter.ru/images/products/27772/main.jpg") 130 round round;
+  outline: 6px double #5c492c;
+  outline-offset: -35px;
+  padding: 80px 40px;
+  text-align: center;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ebe3c2), to(#bfa470));
+  background: -webkit-linear-gradient(#ebe3c2, #bfa470);
+  background: linear-gradient(#ebe3c2, #bfa470);
+}
+
+@media only screen and (max-width: 479px) {
+  #score {
+    padding: 0;
+  }
+}
+
+#gamers, #summa {
+  margin: 0px auto;
+  margin-bottom: 60px;
+  border: 4px solid #cdb896;
+  background: #ffffad;
+  background-image: -webkit-linear-gradient(60deg, #FEB138, #ffffad 60%);
+  background-image: linear-gradient(30deg, #FEB138, #ffffad 60%);
+}
+
+#gamers {
+  max-width: 440px;
+  outline: 4px double #5c492c;
+}
+
+#gamers section {
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-flow: row wrap;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-align-content: space-between;
+      -ms-flex-line-pack: justify;
+          align-content: space-between;
+}
+
+#gamers section > * {
+  width: 16.66667%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+#gamers form {
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-flow: row wrap;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-align-content: space-between;
+      -ms-flex-line-pack: justify;
+          align-content: space-between;
+  overflow: hidden;
+  width: 33.33%;
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+}
+
+#gamers form > * {
+  width: 50%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+#gamers form:before {
+  content: '';
+  padding-top: 50%;
+  float: left;
+}
+
+.gamer, .bar, #gamers input {
+  overflow: hidden;
+  border: 4px double #5c492c;
+  -webkit-border-radius: 10%;
+          border-radius: 10%;
+}
+
+.gamer:before, .bar:before, #gamers input:before {
+  content: '';
+  padding-top: 100%;
+  float: left;
+}
+
+.bar, #gamers input {
+  color: #5c492c;
+  font-size: 1.8em;
+  text-align: center;
+}
+
+@media only screen and (max-width: 767px) {
+  .bar, #gamers input {
+    font-size: 1.6em;
+  }
+}
+
+@media only screen and (max-width: 479px) {
+  .bar, #gamers input {
+    font-size: 1.2em;
+  }
+}
+
+.gamer {
+  border: 4px double #896d41;
+  position: relative;
+}
+
+.gamer:after {
+  content: "";
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+  background: -webkit-linear-gradient(132deg, rgba(255, 255, 209, 0.4), transparent 55%);
+  background: linear-gradient(-42deg, rgba(255, 255, 209, 0.4), transparent 55%);
+  width: 80%;
+  height: 80%;
+  top: 10%;
+  left: 10%;
+  bottom: 10%;
+  right: 10%;
+  -webkit-border-radius: 10%;
+          border-radius: 10%;
+}
+
+.bar {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: rgba(255, 255, 209, 0.3);
+  text-shadow: -1px -1px 0 #5c492c;
+  background-clip: text;
+  background: #cdb896;
+  position: relative;
+}
+
+.bar:after {
+  content: "";
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+  background: -webkit-linear-gradient(132deg, rgba(255, 255, 209, 0.4) 18%, transparent 42%, rgba(255, 255, 209, 0.1) 54%, transparent 70%);
+  background: linear-gradient(-42deg, rgba(255, 255, 209, 0.4) 18%, transparent 42%, rgba(255, 255, 209, 0.1) 54%, transparent 70%);
+  -webkit-border-radius: 10%;
+          border-radius: 10%;
+}
+
+#gamers input {
+  border: 4px double #896d41;
+  outline: none;
+  height: 100%;
+  background-color: rgba(255, 255, 224, 0.2);
+}
+
+#gamers input:focus, #gamers input:hover, #gamers input:active {
+  background-color: #ffffd1;
+  outline: none;
+}
+
+#close {
+  border: 30px solid #112735;
+  -webkit-border-image: url("http://htmlbook.ru/files/images/css/css_border-image-1.png") 30 round round;
+       -o-border-image: url("http://htmlbook.ru/files/images/css/css_border-image-1.png") 30 round round;
+          border-image: url("http://htmlbook.ru/files/images/css/css_border-image-1.png") 30 round round;
+  background: url("http://dreempics.com/img/picture/Apr/28/d84b3a9eb1c975e9718cbefbc2ed0a2f/7.jpg") center/cover no-repeat scroll skyblue;
+  padding: 40px;
+}
+
+@media only screen and (max-width: 479px) {
+  #close {
+    padding: 0;
+  }
+}
+
+#close::-webkit-scrollbar {
+  width: 7px;
+}
+
+#close::-webkit-scrollbar-thumb {
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(-5%, #B1C2D2), color-stop(15%, skyblue), color-stop(30%, transparent), color-stop(90%, #24526f), color-stop(103%, transparent));
+  background-image: -webkit-linear-gradient(#B1C2D2 -5%, skyblue 15%, transparent 30%, #24526f 90%, transparent 103%);
+  background-image: linear-gradient(#B1C2D2 -5%, skyblue 15%, transparent 30%, #24526f 90%, transparent 103%);
+}
+
+#summa {
+  max-width: 350px;
+  outline: 2px solid #5c492c;
+}
+
+#summa section {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-flow: row wrap;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-align-content: space-between;
+      -ms-flex-line-pack: justify;
+          align-content: space-between;
+}
+
+#summa section > * {
+  width: 25%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.nav-buttons {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+#backward, #result {
+  margin: 10px 60px;
+  font-size: 1.4em;
+  text-align: center;
+  color: rgba(255, 255, 209, 0.4);
+  text-shadow: -1px -1px 0 #47110a;
+  background-clip: text;
+}
+
+@-webkit-keyframes pullDown {
+  0% {
+    -webkit-transform: scaleY(0.1);
+            transform: scaleY(0.1);
+    margin-top: -384px;
+    background: rgba(255, 255, 224, 0.8);
+  }
+  80% {
+    -webkit-transform: scaleY(1);
+            transform: scaleY(1);
+    margin-top: -8px;
+    background: lightyellow;
+  }
+  100% {
+    margin-top: 0;
+  }
+}
+
+@keyframes pullDown {
+  0% {
+    -webkit-transform: scaleY(0.1);
+            transform: scaleY(0.1);
+    margin-top: -384px;
+    background: rgba(255, 255, 224, 0.8);
+  }
+  80% {
+    -webkit-transform: scaleY(1);
+            transform: scaleY(1);
+    margin-top: -8px;
+    background: lightyellow;
+  }
+  100% {
+    margin-top: 0;
+  }
+}
+
+@-webkit-keyframes visible {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes visible {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+	
+	</style>
+</head>
+<body>
+
+<div id="start">
+	<article id="greeting">
+		<h1>Каркассон</h1>
+		<p><span>В</span>ы въезжаете во&nbsp;владения всемилостивейшего Герцога де&nbsp;Каркассона. Будьте благоразумны и&nbsp;ведите себя в&nbsp;соответствии с&nbsp;вашим сословием и&nbsp;званием, дабы не&nbsp;навлечь гнев Его Светлости. Если обронили что-либо с&nbsp;повозки - не&nbsp;поднимайте, так&nbsp;как это уже не&nbsp;принадлежит вам. Если желаете владеть здесь какими-либо правами - приобретите имущество в&nbsp;черте города и&nbsp;поступите на&nbsp;службу Его Светлости, а&nbsp;также будьте готовы подтвердить благородство своего происхождения и верность нашему могущественному сюзерену. Не&nbsp;вздумайте заводить здесь свои порядки или разбойничать на&nbsp;дорогах, иначе вас ждет виселица. Если же сами станете жертвой разбойного нападения - вы можете смело искать защиты у&nbsp;нашего всеславнейшего и всепрекраснейшего Герцога, заплатив предварительно все требуемые пошлины.  </p>
+		<p><span>К</span>ак вы, вероятно, уже осведомлены, Его Светлость доверил эти края управлению своих помощников, распределив их между шестью благородными кланами. Если вы принадлежите какому-либо из&nbsp;вышеозначенных кланов или являетесь другом или гостем клана, подтвердите свои привилегии, выбрав герб вашего клана. Если&nbsp;же нет, заплатите пошлину и идите с&nbsp;миром.</p>
+		<button id="waymark">&#8594</button>
+	</article>
+</div>
+
+<div id="shilds">
+	<div id="menu">
+		<button class="green"></button>
+		<button class="gray"></button>
+		<button class="yellow"></button>
+		<button class="blue"></button>
+		<button class="black"></button>
+		<button class="red"></button>
+	</div>
+	<button id="confirm">начать игру  &#8594</button>
+</div>
+
+<div id="score">
+	<div id="gamers"></div>
+	<div class="nav-buttons">
+		<button id="backward">&#8592 назад</button>
+		<button id="result">завершить игру  &#8594</button>
+	</div>
+</div>
+	
+<div id="close">
+	<div id="summa" class="visible"></div>
+</div>
+
+<script>
+
+var start 	= document.getElementById('start'),
+	greeting 	= document.getElementById('greeting'),
+	shilds 		= document.getElementById('shilds'),
+	menu 		  = document.getElementById('menu'),
+	score 		= document.getElementById('score'),
+	gamers 	  = document.getElementById('gamers'),
+	summa 		= document.getElementById('summa'),
+	close 		= document.getElementById('close');
+
+document.getElementById('waymark').onclick = function() {
+	leafOver(start, shilds);
+}
+document.getElementById('confirm').onclick = function() {
+	if (!gamers.hasChildNodes()) return;
+	leafOver(shilds, score);
+	console.log('\n');
+	startPlayCount();
+}
+document.getElementById('backward').onclick = function() {
+	leafOver(score, shilds);
+	gamers.innerHTML = '';
+  
+  var selected = menu.querySelectorAll('.selected');
+  Array.prototype.forEach.call(selected, function(elem) {
+    elem.classList.remove('selected');
+  })
+}
+
+function leafOver(elementToHide, elementToShow) {
+	elementToHide.style.display = 'none'; 
+	elementToShow.style.display = 'block';
+}
+
+window.onload = function() {
+	setTimeout(function() {
+		greeting.setAttribute('class', 'visible');
+	}, 1800);
+}
+
+menu.onclick = function (e) {
+
+  var target = e.target;
+  if (target.tagName !== 'BUTTON') return;
+  
+  target.classList.remove('selected');
+
+  var selected = target.className,
+    gamer = document.getElementById(selected);
+
+  if (!gamer || gamer === null) {
+    console.log('That is %s shild', selected);
+    target.classList.add('selected');
+    var newGamer = createGamer(selected);
+    gamers.appendChild(newGamer);
+  }
+
+  else {
+    gamers.removeChild(gamer);
+    console.log('The %s shild was removed', selected);
+  }  
+}
+
+
+function createGamer(id) {
+	var gamer = document.createElement('section');
+	gamer.id = id;
+	gamer.innerHTML = '<div class="bar">&#9884;</div><div class="gamer ' + id 
+    + '"></div><form action=""><button class="bar"></button><input type="text" inputmode="numeric"></form><span class="bar"></span><div class="bar">&#9884;</div>';
+	return gamer;
+}
+
+
+function startPlayCount() {
+
+	var sections 		= gamers.querySelectorAll('section'),
+		firstSection 	= sections[0],
+		firstInp		  = firstSection.querySelector('input');
+	
+	firstInp.focus();
+
+	Array.prototype.forEach.call(sections, function(section) {
+		
+		var inp 	= section.querySelector('input'), 
+			  btn 	= section.querySelector('button'), 
+			  span 	= section.querySelector('span'), 
+			  val 	= Number(inp.value),
+			  id 		= section.id;
+	
+		var nextSection = section.nextElementSibling,
+			nextInp	= nextSection !== null ? nextSection.querySelector('input') : firstInp;
+		
+		btn.onclick = function(e) {
+			e.preventDefault();
+			var sum = Number(inp.value);
+			
+			if (!isNaN(sum) && sum + val >= 0) {
+				  val += sum;
+			    span.innerHTML = val;
+			    
+			    if (id === "yellow" && sum > 99) console.log(id + ": \t" + sum + " \tsumma: \t" + val); 
+			    else if (id === "yellow") console.log(id + ": \t" + sum + " \t\tsumma: \t" + val); 
+			    else if (sum > 99) console.log(id + ": \t\t" + sum + " \tsumma: \t" + val); 
+			    else console.log(id + ": \t\t" + sum + " \t\tsumma: \t" + val);
+			    
+			    if (nextInp	== firstInp) console.log('\n');
+			    nextInp.focus();
+			}
+			
+			else warning();
+			inp.value = "";
+		}
+	});
+	
+	document.getElementById('result').onclick = function() {
+		var results = Array.prototype.slice.call(sections);
+		results.sort(function(a, b) {
+			return b.querySelector('span').innerHTML - a.querySelector('span').innerHTML;
+		});
+		
+		results.forEach(function(section) {
+			if (section.querySelector('span').innerHTML === '') return;
+			var form = section.querySelector('form');
+			section.removeChild(form);
+			section.removeAttribute('id');
+			summa.appendChild(section);
+			console.log(section.querySelector('.gamer').className + ': \t' + section.querySelector('span').innerHTML + '\n');
+		});
+		
+		leafOver(score, close);
+	} 
+}
+
+
+function warning() {
+	console.log('\t___\t\t\t___\t\t\t___\n\t ! |\t\t ! |\t\t ! |\n\t @ |\t\t @ |\t\t @ |\n\t ^ |\t\t ^ |\t\t ^ |\n\t   |\t\t   |\t\t   |\n\n');
+}
+
+</script>
+</body>
+</html>
